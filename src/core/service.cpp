@@ -2,18 +2,23 @@
 
 #include <cstdlib>
 #include <exception>
-#include <iostream>
 #include <memory>
 #include <utility>
 
+#include <fmt/core.h>
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-int Service::run([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
+#include "command_line.hpp"
+
+namespace core
+{
+
+int Service::run(const CommandLineArguments& cmd_line) noexcept
 try
 {
-	init_logging();
+	init_logging(cmd_line.verbose());
 
 	SPDLOG_INFO("Service started");
 	return EXIT_SUCCESS;
@@ -29,7 +34,7 @@ catch (...)
 	return EXIT_FAILURE;
 }
 
-void Service::init_logging()
+void Service::init_logging(const bool verbose)
 try
 {
 	auto colored_sink =
@@ -37,7 +42,8 @@ try
 	auto logger = std::make_shared< spdlog::logger >("override_default_logger",
 													 colored_sink);
 
-	logger->set_level(spdlog::level::debug);
+	verbose ? logger->set_level(spdlog::level::debug)
+			: logger->set_level(spdlog::level::info);
 	logger->set_pattern("[%d %b %H:%M:%S %e][t:%t][%s:%#][%^%l%$] %v");
 
 	spdlog::set_default_logger(logger);
@@ -45,6 +51,8 @@ try
 }
 catch (const std::exception& e)
 {
-	std::cerr << "Initialize log failed: " << e.what() << std::endl;
+	fmt::print(stderr, "Initialize log failed: {}\n", e.what());
 	throw;
 }
+
+} // namespace core

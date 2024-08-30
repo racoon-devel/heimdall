@@ -5,15 +5,22 @@
 
 #include <spdlog/logger.h>
 
+namespace core
+{
+
+class CommandLineArguments;
+
 class Service final
 {
 public:
-	int run(int argc, char** argv);
+	int run(const CommandLineArguments& cmd_line) noexcept;
 
 private:
 	std::shared_ptr< spdlog::logger > m_logger{};
 
-	void init_logging();
+	void init_logging(const bool verbose);
 };
+
+} // namespace core
 
 #endif // CORE_SERVICE_HPP_

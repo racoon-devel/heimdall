@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(heimdall VERSION 1.0.0)
+project(heimdall VERSION 0.0.1)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
@@ -11,6 +11,7 @@ endif()
 
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
+find_package(cxxopts REQUIRED)
 pkg_check_modules(FMT REQUIRED fmt)
 pkg_check_modules(SPDLOG REQUIRED spdlog)
 

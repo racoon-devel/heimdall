@@ -8,3 +8,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} ${3RDPARTY_LIBRARIES})
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE -DPROJECT_VERSION="${CMAKE_PROJECT_VERSION}")
