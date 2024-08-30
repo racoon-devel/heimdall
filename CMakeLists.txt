@@ -14,6 +14,7 @@ find_package(PkgConfig REQUIRED)
 find_package(cxxopts REQUIRED)
 pkg_check_modules(FMT REQUIRED fmt)
 pkg_check_modules(SPDLOG REQUIRED spdlog)
+pkg_check_modules(RAPIDJSON REQUIRED RapidJSON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -26,11 +27,13 @@ add_compile_options(-Werror -Wall -Wextra -Wshadow -Wunknown-pragmas -Wformat=2 
 set(3RDPARTY_LIBRARIES
         ${FMT_LINK_LIBRARIES}
         ${SPDLOG_LINK_LIBRARIES}
+        ${RAPIDJSON_LINK_LIBRARIES}
 )
 
 set(3RDPARTY_INCLUDES
         ${FMT_INCLUDE_DIRS}
         ${SPDLOG_INCLUDE_DIRS}
+        ${RAPIDJSON_INCLUDE_DIRS}
 )
 
 add_subdirectory(src)

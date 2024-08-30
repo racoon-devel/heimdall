@@ -5,6 +5,11 @@
 
 #include <spdlog/logger.h>
 
+namespace config
+{
+class Config;
+}
+
 namespace core
 {
 
@@ -18,7 +23,9 @@ public:
 private:
 	std::shared_ptr< spdlog::logger > m_logger{};
 
-	void init_logging(const bool verbose);
+	void init_logging();
+	void apply_command_line(const CommandLineArguments& cmd_line);
+	void apply_config(const config::Config& conf);
 };
 
 } // namespace core
