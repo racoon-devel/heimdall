@@ -21,7 +21,7 @@ int Service::run(const CommandLineArguments& cmd_line) noexcept
 try
 {
 	init_logging();
-	
+
 	auto conf = config::Config::load(cmd_line.config_path());
 	apply_config(conf);
 	apply_command_line(cmd_line);
@@ -49,7 +49,7 @@ try
 													 colored_sink);
 
 	logger->set_level(spdlog::level::info);
-	logger->set_pattern("[%d %b %H:%M:%S %e][t:%t][%s:%#][%^%l%$] %v");
+	logger->set_pattern("[%d %b %H:%M:%S.%e][t:%t][%s:%#][%^%l%$] %v");
 
 	spdlog::set_default_logger(logger);
 	m_logger = std::move(logger);
