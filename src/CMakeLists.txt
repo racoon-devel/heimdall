@@ -1,6 +1,16 @@
+include(EmbedResource)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS *.cpp *.hpp)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+# Embed JSON schema of config
+embed_resource(config_schema config/schema.json)
+
+add_executable(${PROJECT_NAME} 
+    ${SOURCES}
+    ${CMAKE_CURRENT_BINARY_DIR}/config_schema.o
+)
+
+add_dependencies(${PROJECT_NAME} config_schema)
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}

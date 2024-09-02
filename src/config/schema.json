@@ -1,0 +1,22 @@
+{
+    "$schema": "json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "debug": {
+            "type": "object",
+            "properties": {
+                "log_level": {
+                    "type": "string",
+                    "enum": [
+                        "critical",
+                        "error",
+                        "warn",
+                        "info",
+                        "debug",
+                        "trace"
+                    ]
+                }
+            }
+        }
+    }
+}
